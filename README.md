@@ -27,19 +27,6 @@
                   CSS(styles & Responsiveness)  , Bootstrap, TailwindCSS    
     JavaScript
     ReactJS/Angular/Vue/NextJS       
-# STORING FILES IN MERN APP
-
-    Client                              Backend
-    --------------------------------------------
-    JSON                                req.body(exp.json()->body parser )  ---> DB
-    Binary data(File)                   req.file ( multer ) ---> DB (X)
-
-                                        3rd party cloud(AWS, Cloudinary)
-                                            |
-                                            CDN link of the file
-                                            |
-                                            Store in DB
-
 
 - Install cloudinary & multer
         npm install cloudinary multer
@@ -70,27 +57,7 @@ export const uploadToCloudinary = (buffer) => {
   });
 };
 
-multer.js
----------
-import multer from "multer";
 
-export const upload = multer({
-  storage: multer.memoryStorage(),
-  //to avoid RAM overflow
-  limits: {
-    fileSize: 2 * 1024 * 1024, // 2MB
-  },
-  //for security validation
-  fileFilter: (req, file, cb) => {
-    if (file.mimetype === "image/jpeg" || file.mimetype === "image/png") {
-      cb(null, true);
-    } else {
-      const err = new Error("Only JPG and PNG allowed");
-      err.status = 400;
-      cb(err, false);
-    }
-  },
-});
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
